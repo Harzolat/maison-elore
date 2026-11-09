@@ -21,12 +21,16 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-taupe-light/70 bg-ivory/95 backdrop-blur-sm">
       <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-5 md:h-20 md:px-10">
-        <Link
-          to="/"
-          className="font-display text-lg uppercase tracking-[0.28em] text-charcoal md:text-xl"
-          aria-label={`${site.name}, home`}
-        >
-          {site.name}
+        <Link to="/" className="flex items-center gap-3" aria-label={`${site.name}, home`}>
+          <img
+            src="/images/logo.png"
+            alt=""
+            aria-hidden="true"
+            className="h-7 w-7 md:h-8 md:w-8"
+          />
+          <span className="font-display text-lg uppercase tracking-[0.28em] text-charcoal md:text-xl">
+            {site.name}
+          </span>
         </Link>
 
         <nav aria-label="Main" className="hidden lg:block">

@@ -23,7 +23,8 @@ Everything brand-specific is deliberately isolated:
 | Brand name, WhatsApp number, email, studio, hours, social links, price switch | `src/config/site.js` |
 | Product catalogue (name, slug, description, materials, colours, sizes, fit, images) | `src/data/products.js` |
 | Collections and category filters | `src/data/collections.js` |
-| Product photography | `public/images/products/` |
+| Product photography (studio supplied, 3:4 crops) | `public/images/products/` |
+| Logo: navbar, footer, favicon, touch icon | `public/images/logo.png`, `public/images/logo-light.png`, `public/favicon.png` |
 | Editorial and atelier photography | `public/images/` |
 | Fonts | `public/fonts/` (SIL OFL files) |
 | Image credits | `public/CREDITS.md` |

@@ -48,8 +48,8 @@ function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
           >
-            Maison Éloré cuts a small menswear wardrobe in honest cloth: tailoring, knitwear
-            and outerwear, made to be worn for years rather than seasons.
+            Maison Éloré cuts a small menswear wardrobe in honest cloth: linen and cotton
+            shirting, made to be worn for years rather than seasons.
           </motion.p>
 
           <motion.div
@@ -132,8 +132,7 @@ export default function Home() {
               tone="dark"
             />
             <p className="mt-5 text-sm leading-relaxed text-taupe-light">
-              Tailoring, knitwear and outerwear cut from wool, cashmere and cotton in
-              charcoal, stone, camel and olive.
+              Indigo, chalk blue and silver grey, in linen and cotton poplin.
             </p>
             <Link to="/collections" className="btn-outline mt-9 border-taupe text-ivory hover:bg-ivory hover:text-charcoal">
               Browse the collection
@@ -156,8 +155,7 @@ export default function Home() {
           <Reveal delay={0.1} className="lg:order-1">
             <SectionHeading title={permanentLine.name} intro={permanentLine.introduction} />
             <p className="mt-5 text-sm leading-relaxed text-charcoal-soft">
-              Pieces that stay in the collection year after year, ordered the same way each
-              time.
+              Powder blue, sand and white, in linen and washed cotton.
             </p>
             <Link to="/collections" className="btn-outline mt-9">
               Browse the collection

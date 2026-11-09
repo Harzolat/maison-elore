@@ -10,21 +10,15 @@ export const collections = [
     slug: 'winter-study',
     name: 'The Winter Study',
     introduction:
-      'Layered tailoring and deep-pile knits in charcoal, stone and olive. A small wardrobe built for cold mornings and long evenings.',
+      'Deeper shirting in indigo and silver: linen grandad collars and fine cotton stripes, cut for cooler mornings and long evenings.',
   },
   {
     slug: 'permanent-line',
     name: 'The Permanent Line',
     introduction:
-      'Shirting and leather goods that stay in the collection year after year, cut from the same patterns and finished the same way.',
+      'Shirting that stays in the collection year after year, cut from the same patterns and finished the same way.',
   },
 ]
 
 /** Category filters shown on the collections page. */
-export const categories = [
-  'Tailoring',
-  'Outerwear',
-  'Shirting',
-  'Knitwear',
-  'Accessories',
-]
+export const categories = ['Linen', 'Cotton']

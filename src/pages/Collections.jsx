@@ -25,9 +25,10 @@ export default function Collections() {
         <header className="max-w-2xl">
           <h1 className="text-5xl text-charcoal md:text-6xl">The Collection</h1>
           <p className="mt-5 max-w-[58ch] text-base leading-relaxed text-charcoal-soft">
-            A small menswear wardrobe: tailoring, knitwear, outerwear, shirting and a
-            leather-free line of accessories. Every piece is made to order or drawn from the
-            studio&apos;s current run, and availability is confirmed when you enquire.
+            A small shirting wardrobe in linen and cotton: grandad collars, band collars,
+            henleys, camp collars and fine stripes. Every piece is made to order or drawn
+            from the studio&apos;s current run, and availability is confirmed when you
+            enquire.
           </p>
         </header>
       </Reveal>
