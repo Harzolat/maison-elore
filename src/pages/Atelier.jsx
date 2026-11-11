@@ -28,7 +28,7 @@ export default function Atelier() {
           <header className="max-w-2xl">
             <h1 className="text-5xl text-charcoal md:text-6xl">The Atelier</h1>
             <p className="mt-6 max-w-[56ch] text-lg leading-relaxed text-charcoal-soft">
-              Maison Éloré is a small menswear studio. We design a tight collection each
+              LateHour is a small menswear studio. We design a tight collection each
               season, cut it in honest cloth, and sell it through conversation rather than a
               checkout.
             </p>

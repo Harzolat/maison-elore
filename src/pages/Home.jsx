@@ -48,7 +48,7 @@ function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
           >
-            Maison Éloré cuts a small menswear wardrobe in honest cloth: linen and cotton
+            LateHour cuts a small menswear wardrobe in honest cloth: linen and cotton
             shirting, made to be worn for years rather than seasons.
           </motion.p>
 

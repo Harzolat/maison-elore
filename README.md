@@ -1,4 +1,4 @@
-# Maison Éloré
+# LateHour
 
 A concept website for a fictional premium menswear atelier: an
 editorial product showcase with enquiry-based contact (no cart,
@@ -42,7 +42,7 @@ Setting `features.showPrices: true` in `src/config/site.js` and adding a
 ## Routes
 
 - `/` homepage with hero, selected pieces, both collection editorials, atelier intro, enquiry CTA
-- `/collections` filterable grid (`?category=Tailoring` etc. deep-links a filter)
+- `/collections` filterable grid (`?category=Linen` etc. deep-links a filter)
 - `/products/:slug` gallery, details, size selection, product enquiry
 - `/atelier` studio philosophy
 - `/contact` enquiry form and contact details (`?piece=<slug>&size=<size>` prefills a product enquiry)

@@ -14,7 +14,7 @@
  */
 
 export const site = {
-  name: 'Maison Éloré',
+  name: 'LateHour',
   /** Shown in the footer and the enquiry "from" context. */
   descriptor: 'Menswear atelier',
   /** Honest sample-content notice shown in the announcement strip.
@@ -25,7 +25,7 @@ export const site = {
   contact: {
     /** International WhatsApp number, digits only, no plus sign. E.g. '447700900123' */
     whatsappNumber: '',
-    /** E.g. 'studio@maisonelore.com' */
+    /** E.g. 'studio@latehour.com' */
     email: '',
     /** Physical address or "by appointment" note. */
     studio: '',
