@@ -10,7 +10,7 @@ export const collections = [
     slug: 'winter-study',
     name: 'The Winter Study',
     introduction:
-      'Deeper shirting in indigo and silver: linen grandad collars and fine cotton stripes, cut for cooler mornings and long evenings.',
+      'The collection carried into winter: fine shirting and simple layers in chalk grey, camel and black, worn under a long wool coat.',
   },
   {
     slug: 'permanent-line',

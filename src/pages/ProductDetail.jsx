@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import usePageTitle from '../lib/usePageTitle.js'
+import { priceLabel } from '../lib/priceLabel.js'
 import Reveal from '../components/Reveal.jsx'
 import ProductGallery from '../components/ProductGallery.jsx'
 import ProductCard from '../components/ProductCard.jsx'
@@ -18,8 +19,8 @@ export default function ProductDetail() {
   if (!product) {
     return (
       <div className="mx-auto max-w-[1400px] px-5 py-24 text-center md:px-10">
-        <h1 className="text-4xl text-charcoal">This piece is not in the catalogue</h1>
-        <p className="mx-auto mt-4 max-w-[46ch] text-base text-charcoal-soft">
+        <h1 className="text-4xl text-cream">This piece is not in the catalogue</h1>
+        <p className="mx-auto mt-4 max-w-[46ch] text-base text-cream-soft">
           The link may be out of date, or the piece may have been replaced. The current
           collection is one click away.
         </p>
@@ -47,7 +48,7 @@ export default function ProductDetail() {
 
   return (
     <div className="mx-auto max-w-[1400px] px-5 py-10 md:px-10 md:py-14">
-      <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-[0.14em] text-charcoal-soft">
+      <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-[0.14em] text-cream-soft">
         <Link to="/collections" className="link-underline">
           The Collection
         </Link>
@@ -61,37 +62,37 @@ export default function ProductDetail() {
         </div>
 
         <div className="lg:col-span-5">
-          <p className="text-xs uppercase tracking-[0.14em] text-charcoal-soft">
+          <p className="text-xs uppercase tracking-[0.14em] text-cream-soft">
             {product.category}
             {collection ? ` · ${collection.name}` : ''}
           </p>
-          <h1 className="mt-4 text-4xl text-charcoal md:text-5xl">{product.name}</h1>
-          <p className="mt-4 text-sm uppercase tracking-[0.12em] text-charcoal-soft">
-            Price on request
+          <h1 className="mt-4 text-4xl text-cream md:text-5xl">{product.name}</h1>
+          <p className="mt-4 text-sm uppercase tracking-[0.12em] text-cream-soft">
+            {priceLabel(product)}
           </p>
 
-          <p className="mt-6 max-w-[54ch] text-base leading-relaxed text-charcoal-soft">
+          <p className="mt-6 max-w-[54ch] text-base leading-relaxed text-cream-soft">
             {product.description}
           </p>
 
-          <dl className="mt-10 border-t border-taupe-light">
-            <div className="grid grid-cols-3 gap-4 border-b border-taupe-light py-4">
-              <dt className="text-xs uppercase tracking-[0.14em] text-charcoal-soft">Materials</dt>
-              <dd className="col-span-2 text-sm text-charcoal">{product.materials.join(', ')}</dd>
+          <dl className="mt-10 border-t border-cream/15">
+            <div className="grid grid-cols-3 gap-4 border-b border-cream/15 py-4">
+              <dt className="text-xs uppercase tracking-[0.14em] text-cream-soft">Materials</dt>
+              <dd className="col-span-2 text-sm text-cream">{product.materials.join(', ')}</dd>
             </div>
-            <div className="grid grid-cols-3 gap-4 border-b border-taupe-light py-4">
-              <dt className="text-xs uppercase tracking-[0.14em] text-charcoal-soft">Colours</dt>
-              <dd className="col-span-2 text-sm text-charcoal">{product.colours.join(', ')}</dd>
+            <div className="grid grid-cols-3 gap-4 border-b border-cream/15 py-4">
+              <dt className="text-xs uppercase tracking-[0.14em] text-cream-soft">Colours</dt>
+              <dd className="col-span-2 text-sm text-cream">{product.colours.join(', ')}</dd>
             </div>
-            <div className="grid grid-cols-3 gap-4 border-b border-taupe-light py-4">
-              <dt className="text-xs uppercase tracking-[0.14em] text-charcoal-soft">Fit</dt>
-              <dd className="col-span-2 text-sm leading-relaxed text-charcoal">{product.fit}</dd>
+            <div className="grid grid-cols-3 gap-4 border-b border-cream/15 py-4">
+              <dt className="text-xs uppercase tracking-[0.14em] text-cream-soft">Fit</dt>
+              <dd className="col-span-2 text-sm leading-relaxed text-cream">{product.fit}</dd>
             </div>
           </dl>
 
           {product.availableSizes ? (
             <fieldset className="mt-10">
-              <legend className="text-xs uppercase tracking-[0.14em] text-charcoal-soft">
+              <legend className="text-xs uppercase tracking-[0.14em] text-cream-soft">
                 Size
               </legend>
               <div className="mt-4 flex flex-wrap gap-3" role="group">
@@ -105,8 +106,8 @@ export default function ProductDetail() {
                       aria-pressed={isActive}
                       className={`min-w-14 border px-4 py-3 text-sm transition-colors duration-300 ${
                         isActive
-                          ? 'border-charcoal bg-charcoal text-ivory'
-                          : 'border-taupe-light text-charcoal hover:border-taupe'
+                          ? 'border-gold bg-gold text-ink'
+                          : 'border-cream/15 text-cream hover:border-gold/40'
                       }`}
                     >
                       {option}
@@ -114,20 +115,20 @@ export default function ProductDetail() {
                   )
                 })}
               </div>
-              <p className="mt-3 text-xs leading-relaxed text-charcoal-soft">
+              <p className="mt-3 text-xs leading-relaxed text-cream-soft">
                 Sizes shown are sample data and are not confirmed stock. The studio confirms
                 sizing on enquiry.
               </p>
             </fieldset>
           ) : (
-            <p className="mt-10 text-sm text-charcoal-soft">One size.</p>
+            <p className="mt-10 text-sm text-cream-soft">One size.</p>
           )}
 
-          <div className="mt-10 border-l-2 border-taupe bg-ivory-deep px-5 py-4">
-            <h2 className="text-xs uppercase tracking-[0.14em] text-charcoal-soft">
+          <div className="mt-10 border-l-2 border-gold/40 bg-ink-soft px-5 py-4">
+            <h2 className="text-xs uppercase tracking-[0.14em] text-cream-soft">
               Availability
             </h2>
-            <p className="mt-2 text-sm leading-relaxed text-charcoal">{product.availabilityNote}</p>
+            <p className="mt-2 text-sm leading-relaxed text-cream">{product.availabilityNote}</p>
           </div>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -137,7 +138,7 @@ export default function ProductDetail() {
             <WhatsAppEnquiryLink message={whatsappMessage} className="w-full sm:w-auto" />
           </div>
           {selectedSize && (
-            <p className="mt-3 text-xs text-charcoal-soft">
+            <p className="mt-3 text-xs text-cream-soft">
               Your enquiry will mention size {selectedSize}.
             </p>
           )}
@@ -145,9 +146,9 @@ export default function ProductDetail() {
       </div>
 
       {related.length > 0 && (
-        <section className="mt-24 border-t border-taupe-light pt-16 md:mt-32">
+        <section className="mt-24 border-t border-cream/15 pt-16 md:mt-32">
           <Reveal>
-            <h2 className="text-3xl text-charcoal md:text-4xl">You may also consider</h2>
+            <h2 className="text-3xl text-cream md:text-4xl">You may also consider</h2>
           </Reveal>
           <div className="mt-10 grid grid-cols-2 gap-x-5 gap-y-12 md:gap-x-8 lg:grid-cols-3 lg:gap-x-10">
             {related.map((item, index) => (
@@ -157,7 +158,7 @@ export default function ProductDetail() {
             ))}
           </div>
           <p className="mt-14">
-            <Link to="/collections" className="link-underline text-xs uppercase tracking-[0.18em] text-charcoal">
+            <Link to="/collections" className="link-underline text-xs uppercase tracking-[0.18em] text-cream">
               Back to the collection
             </Link>
           </p>

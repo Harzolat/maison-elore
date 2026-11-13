@@ -16,7 +16,7 @@ export default function ProductGallery({ product }) {
 
   return (
     <div>
-      <div className="relative aspect-3/4 w-full overflow-hidden bg-ivory-deep">
+      <div className="relative aspect-3/4 w-full overflow-hidden bg-ink-soft">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={active.src}
@@ -48,8 +48,8 @@ export default function ProductGallery({ product }) {
               aria-label={`Show photograph ${index + 1} of ${images.length}: ${image.alt}`}
               className={`h-20 w-16 overflow-hidden border transition-colors duration-300 md:h-24 md:w-20 ${
                 index === activeIndex
-                  ? 'border-charcoal'
-                  : 'border-taupe-light hover:border-taupe'
+                  ? 'border-gold'
+                  : 'border-cream/15 hover:border-gold/40'
               }`}
             >
               <img

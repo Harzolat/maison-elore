@@ -6,8 +6,8 @@ export default function NotFound() {
 
   return (
     <div className="mx-auto max-w-[1400px] px-5 py-24 text-center md:px-10 md:py-32">
-      <h1 className="text-5xl text-charcoal md:text-6xl">Page not found</h1>
-      <p className="mx-auto mt-5 max-w-[46ch] text-base leading-relaxed text-charcoal-soft">
+      <h1 className="text-5xl text-cream md:text-6xl">Page not found</h1>
+      <p className="mx-auto mt-5 max-w-[46ch] text-base leading-relaxed text-cream-soft">
         This address does not match anything on the site. The collection is the best place to
         start again.
       </p>

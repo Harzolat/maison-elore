@@ -17,7 +17,7 @@ export const site = {
   name: 'LateHour',
   /** Shown in the footer and the enquiry "from" context. */
   descriptor: 'Menswear atelier',
-  /** Honest sample-content notice shown in the announcement strip.
+  /** Honest sample-content notice shown at the foot of the mobile menu.
    *  Remove this entry once real product data is in place. */
   sampleNotice:
     'Concept site. The pieces, collections and availability shown here are sample content.',

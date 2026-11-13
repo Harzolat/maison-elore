@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 /**
- * Image with a reserved aspect box (no layout shift), a soft ivory
+ * Image with a reserved aspect box (no layout shift), a dark
  * placeholder while loading, and an honest fallback when a file is
  * missing. Use `priority` for above-the-fold images such as the hero.
  */
@@ -17,7 +17,7 @@ export default function LazyImage({
   const [status, setStatus] = useState('loading')
 
   return (
-    <div className={`relative overflow-hidden bg-ivory-deep ${className}`}>
+    <div className={`relative overflow-hidden bg-ink-soft ${className}`}>
       {status !== 'error' && (
         <img
           src={src}
@@ -38,9 +38,9 @@ export default function LazyImage({
         <div
           role="img"
           aria-label={alt ? `${alt} (photograph unavailable)` : 'Photograph unavailable'}
-          className="flex h-full w-full items-center justify-center border border-taupe-light bg-ivory-deep p-6 text-center"
+          className="flex h-full w-full items-center justify-center border border-cream/15 bg-ink-soft p-6 text-center"
         >
-          <span className="text-xs uppercase tracking-[0.18em] text-charcoal-soft">
+          <span className="text-xs uppercase tracking-[0.18em] text-cream-soft">
             Photograph unavailable
           </span>
         </div>

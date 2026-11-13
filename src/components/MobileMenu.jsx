@@ -11,6 +11,10 @@ const links = [
   { to: '/contact', label: 'Contact' },
 ]
 
+function isLinkActive(pathname, to) {
+  return pathname === to || (to === '/collections' && pathname.startsWith('/products'))
+}
+
 /**
  * Full-screen navigation panel for small screens.
  * Closes on route change and Escape, traps scroll, and moves focus to
@@ -20,6 +24,7 @@ export default function MobileMenu({ open, onClose }) {
   const location = useLocation()
   const reduceMotion = useReducedMotion()
   const closeButtonRef = useRef(null)
+  const panelRef = useRef(null)
 
   // Close whenever the route changes.
   useEffect(() => {
@@ -30,16 +35,40 @@ export default function MobileMenu({ open, onClose }) {
   useEffect(() => {
     if (!open) return undefined
     const previousOverflow = document.body.style.overflow
+    const previouslyFocused = document.activeElement
     document.body.style.overflow = 'hidden'
     closeButtonRef.current?.focus()
 
     const onKeyDown = (event) => {
-      if (event.key === 'Escape') onClose()
+      if (event.key === 'Escape') {
+        onClose()
+        return
+      }
+      if (event.key !== 'Tab' || !panelRef.current) return
+
+      // Keep Tab inside the open panel while it is acting as a modal.
+      const focusable = [
+        ...panelRef.current.querySelectorAll(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      ]
+      if (focusable.length === 0) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
     }
     window.addEventListener('keydown', onKeyDown)
     return () => {
       document.body.style.overflow = previousOverflow
       window.removeEventListener('keydown', onKeyDown)
+      // Hand focus back to whatever opened the menu (the header button).
+      if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus()
     }
   }, [open, onClose])
 
@@ -49,7 +78,8 @@ export default function MobileMenu({ open, onClose }) {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-50 bg-ivory lg:hidden"
+          ref={panelRef}
+          className="fixed inset-0 z-50 bg-ink lg:hidden"
           initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
           exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -12 }}
@@ -65,8 +95,8 @@ export default function MobileMenu({ open, onClose }) {
               className="flex items-center gap-3"
               aria-label={`${site.name}, home`}
             >
-              <img src="/images/logo.png" alt="" aria-hidden="true" className="h-6 w-6" />
-              <span className="font-display text-base uppercase tracking-[0.3em] text-charcoal">
+              <img src="/images/logo-light.png" alt="" aria-hidden="true" className="h-6 w-6" />
+              <span className="font-display text-base uppercase tracking-[0.3em] text-cream">
                 {site.name}
               </span>
             </Link>
@@ -75,7 +105,7 @@ export default function MobileMenu({ open, onClose }) {
               type="button"
               onClick={onClose}
               aria-label="Close menu"
-              className="-mr-2 flex h-11 w-11 items-center justify-center text-charcoal"
+              className="-mr-2 flex h-11 w-11 items-center justify-center text-cream"
             >
               <X aria-hidden="true" strokeWidth={1.25} />
             </button>
@@ -83,30 +113,36 @@ export default function MobileMenu({ open, onClose }) {
 
           <nav aria-label="Main" className="px-5 pt-10">
             <ul className="space-y-7">
-              {links.map((link, index) => (
-                <motion.li
-                  key={link.to}
-                  initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.45,
-                    delay: reduceMotion ? 0 : 0.08 + index * 0.07,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                >
-                  <Link
-                    to={link.to}
-                    onClick={onClose}
-                    className="font-display text-4xl text-charcoal"
+              {links.map((link, index) => {
+                const active = isLinkActive(location.pathname, link.to)
+                return (
+                  <motion.li
+                    key={link.to}
+                    initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.45,
+                      delay: reduceMotion ? 0 : 0.08 + index * 0.07,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
                   >
-                    {link.label}
-                  </Link>
-                </motion.li>
-              ))}
+                    <Link
+                      to={link.to}
+                      onClick={onClose}
+                      aria-current={active ? 'page' : undefined}
+                      className={`font-display text-4xl transition-colors ${
+                        active ? 'text-gold' : 'text-cream hover:text-gold'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.li>
+                )
+              })}
             </ul>
           </nav>
 
-          <p className="absolute bottom-8 left-5 right-5 max-w-xs text-xs leading-relaxed text-charcoal-soft">
+          <p className="absolute bottom-8 left-5 right-5 max-w-xs text-xs leading-relaxed text-cream-soft">
             {site.sampleNotice}
           </p>
         </motion.div>

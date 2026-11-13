@@ -1,15 +1,6 @@
 import { Link } from 'react-router-dom'
-import { site } from '../config/site.js'
 import LazyImage from './LazyImage.jsx'
-
-function priceLabel(product) {
-  if (site.features.showPrices && product.price) {
-    return typeof product.price === 'number'
-      ? `£${product.price.toLocaleString('en-GB')}`
-      : product.price
-  }
-  return 'Price on request'
-}
+import { priceLabel } from '../lib/priceLabel.js'
 
 /**
  * Catalogue card: photograph, name, one meta line. The whole card is a
@@ -31,11 +22,12 @@ export default function ProductCard({ product, priority = false }) {
         sizes="(max-width: 767px) 50vw, (max-width: 1023px) 33vw, 30vw"
       />
       <div className="mt-4">
-        <h3 className="text-xl text-charcoal">{product.name}</h3>
-        <p className="mt-1 text-xs uppercase tracking-[0.14em] text-charcoal-soft">
+        <h3 className="text-xl text-cream">{product.name}</h3>
+        <span aria-hidden="true" className="card-rule mt-2 w-10" />
+        <p className="mt-2 text-xs uppercase tracking-[0.14em] text-cream-soft">
           {product.category}, {product.colours.join(', ')}
         </p>
-        <p className="mt-2 text-sm text-charcoal-soft">{priceLabel(product)}</p>
+        <p className="mt-2 text-sm text-cream-soft">{priceLabel(product)}</p>
       </div>
     </Link>
   )

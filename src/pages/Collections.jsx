@@ -1,6 +1,7 @@
 import { useSearchParams } from 'react-router-dom'
 import usePageTitle from '../lib/usePageTitle.js'
 import Reveal from '../components/Reveal.jsx'
+import ParallaxImage from '../components/ParallaxImage.jsx'
 import ProductCard from '../components/ProductCard.jsx'
 import ProductGrid from '../components/ProductGrid.jsx'
 import { products, productsInCategory } from '../data/products.js'
@@ -21,19 +22,32 @@ export default function Collections() {
 
   return (
     <div className="mx-auto max-w-[1400px] px-5 py-14 md:px-10 md:py-20">
-      <Reveal>
-        <header className="max-w-2xl">
-          <h1 className="text-5xl text-charcoal md:text-6xl">The Collection</h1>
-          <p className="mt-5 max-w-[58ch] text-base leading-relaxed text-charcoal-soft">
-            A small shirting wardrobe in linen and cotton: grandad collars, band collars,
-            henleys, camp collars and fine stripes. Every piece is made to order or drawn
-            from the studio&apos;s current run, and availability is confirmed when you
-            enquire.
-          </p>
-        </header>
-      </Reveal>
+      <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16">
+        <Reveal className="lg:col-span-7">
+          <header className="max-w-2xl">
+            <h1 className="text-5xl text-cream md:text-6xl">The Collection</h1>
+            <p className="mt-5 max-w-[58ch] text-base leading-relaxed text-cream-soft">
+              A small shirting wardrobe in linen and cotton: grandad collars, band collars,
+              henleys, camp collars and fine stripes. Every piece is made to order or drawn
+              from the studio&apos;s current run, and availability is confirmed when you
+              enquire.
+            </p>
+          </header>
+        </Reveal>
 
-      <div className="mt-10 border-t border-taupe-light pt-6">
+        <Reveal delay={0.1} className="lg:col-span-5">
+          <ParallaxImage
+            src="/images/editorial/look-rust-black.jpg"
+            alt="A rust wool roll-neck with black pleated trousers, rust loafers and a black cross-body bag, laid out flat"
+            className="aspect-4/5 w-full"
+            strength={5}
+            priority
+            sizes="(max-width: 1023px) 100vw, 38vw"
+          />
+        </Reveal>
+      </div>
+
+      <div className="mt-10 border-t border-cream/15 pt-6 md:mt-14">
         <div
           className="flex flex-wrap gap-x-8 gap-y-4"
           role="group"
@@ -50,12 +64,12 @@ export default function Collections() {
                 onClick={() => selectCategory(category)}
                 aria-pressed={isActive}
                 className={`link-underline text-xs uppercase tracking-[0.18em] transition-colors duration-300 ${
-                  isActive ? 'text-charcoal' : 'text-charcoal-soft hover:text-charcoal'
+                  isActive ? 'text-cream' : 'text-cream-soft hover:text-cream'
                 }`}
                 data-active={isActive ? 'true' : undefined}
               >
                 {category}
-                <span className="ml-1.5 align-super text-[0.65rem] text-charcoal-soft">{count}</span>
+                <span className="ml-1.5 align-super text-[0.65rem] text-cream-soft">{count}</span>
               </button>
             )
           })}
@@ -72,8 +86,8 @@ export default function Collections() {
             ))}
           </ProductGrid>
         ) : (
-          <div className="border border-taupe-light px-6 py-16 text-center">
-            <p className="text-lg text-charcoal">
+          <div className="border border-cream/15 px-6 py-16 text-center">
+            <p className="text-lg text-cream">
               No pieces are listed in this category yet.
             </p>
             <button type="button" onClick={() => selectCategory('All')} className="btn-outline mt-6">

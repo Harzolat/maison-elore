@@ -7,9 +7,9 @@ import { getProduct } from '../data/products.js'
 
 function ContactLine({ label, children }) {
   return (
-    <div className="border-t border-taupe-light py-5">
-      <h2 className="text-xs uppercase tracking-[0.14em] text-charcoal-soft">{label}</h2>
-      <div className="mt-2 text-sm leading-relaxed text-charcoal">{children}</div>
+    <div className="border-t border-cream/15 py-5">
+      <h2 className="text-xs uppercase tracking-[0.14em] text-cream-soft">{label}</h2>
+      <div className="mt-2 text-sm leading-relaxed text-cream">{children}</div>
     </div>
   )
 }
@@ -24,8 +24,8 @@ export default function Contact() {
     <div className="mx-auto max-w-[1400px] px-5 py-14 md:px-10 md:py-20">
       <Reveal>
         <header className="max-w-2xl">
-          <h1 className="text-5xl text-charcoal md:text-6xl">Enquiries</h1>
-          <p className="mt-5 max-w-[58ch] text-base leading-relaxed text-charcoal-soft">
+          <h1 className="text-5xl text-cream md:text-6xl">Enquiries</h1>
+          <p className="mt-5 max-w-[58ch] text-base leading-relaxed text-cream-soft">
             Ask about sizing, cloth, alterations, delivery or availability. Enquiries are
             answered by the studio, usually within two working days.
           </p>
@@ -46,7 +46,7 @@ export default function Contact() {
                   Message the studio
                 </a>
               ) : (
-                <p className="text-charcoal-soft">
+                <p className="text-cream-soft">
                   The studio number will be published here once it is confirmed. Until then,
                   prepare an enquiry below and keep it ready to send.
                 </p>
@@ -59,7 +59,7 @@ export default function Contact() {
                   {site.contact.email}
                 </a>
               ) : (
-                <p className="text-charcoal-soft">
+                <p className="text-cream-soft">
                   The studio email address will be published here once it is confirmed.
                 </p>
               )}
@@ -69,7 +69,7 @@ export default function Contact() {
               {site.contact.studio ? (
                 <p>{site.contact.studio}</p>
               ) : (
-                <p className="text-charcoal-soft">
+                <p className="text-cream-soft">
                   Visits are by appointment. The address will be shared with confirmed
                   appointments.
                 </p>
@@ -80,7 +80,7 @@ export default function Contact() {
               {site.contact.hours ? (
                 <p>{site.contact.hours}</p>
               ) : (
-                <p className="text-charcoal-soft">Opening hours will be published here.</p>
+                <p className="text-cream-soft">Opening hours will be published here.</p>
               )}
             </ContactLine>
           </div>
@@ -88,10 +88,10 @@ export default function Contact() {
 
         <Reveal delay={0.1} className="lg:col-span-8">
           <div className="max-w-2xl">
-            <h2 className="text-3xl text-charcoal md:text-4xl">
+            <h2 className="text-3xl text-cream md:text-4xl">
               {product ? `About the ${product.name}` : 'Write your enquiry'}
             </h2>
-            <p className="mt-4 max-w-[54ch] text-sm leading-relaxed text-charcoal-soft">
+            <p className="mt-4 max-w-[54ch] text-sm leading-relaxed text-cream-soft">
               This site is a concept build and is not connected to an inbox yet. The form
               prepares your enquiry properly: it opens WhatsApp when the studio number is
               configured, and otherwise writes the message out for you to copy.
@@ -100,7 +100,7 @@ export default function Contact() {
               <EnquiryForm product={product} initialSize={sizeFromLink} />
             </div>
             {product && (
-              <p className="mt-8 text-xs text-charcoal-soft">
+              <p className="mt-8 text-xs text-cream-soft">
                 Looking for something else?{' '}
                 <Link to="/collections" className="link-underline">
                   Browse the collection

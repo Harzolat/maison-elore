@@ -37,6 +37,15 @@ export default function EnquiryForm({ product = null, initialSize = '' }) {
 
   const sizes = product?.availableSizes || null
 
+  /** Editing an answer invalidates a prepared enquiry, so the preview can
+   *  never sit there showing text that no longer matches the fields. */
+  function resetPreview() {
+    setStatus('idle')
+    setComposed('')
+    setCopied(false)
+    setCopyFailed(false)
+  }
+
   function compose() {
     const lines = [`Hello ${site.name},`, '']
     if (product) {
@@ -54,6 +63,8 @@ export default function EnquiryForm({ product = null, initialSize = '' }) {
     event.preventDefault()
     const nextErrors = validate({ name, email, message })
     setErrors(nextErrors)
+    setStatus('idle')
+    setComposed('')
     setCopied(false)
     setCopyFailed(false)
     if (Object.keys(nextErrors).length > 0) return
@@ -86,7 +97,7 @@ export default function EnquiryForm({ product = null, initialSize = '' }) {
         <div>
           <label
             htmlFor="enquiry-product"
-            className="text-xs uppercase tracking-[0.14em] text-charcoal-soft"
+            className="text-xs uppercase tracking-[0.14em] text-cream-soft"
           >
             Enquiring about
           </label>
@@ -98,7 +109,7 @@ export default function EnquiryForm({ product = null, initialSize = '' }) {
             tabIndex={-1}
             aria-readonly="true"
           />
-          <p className="mt-2 text-xs text-charcoal-soft">
+          <p className="mt-2 text-xs text-cream-soft">
             <Link to={`/products/${product.slug}`} className="link-underline">
               View this piece
             </Link>
@@ -108,14 +119,17 @@ export default function EnquiryForm({ product = null, initialSize = '' }) {
 
       {sizes && (
         <div>
-          <label htmlFor="enquiry-size" className="text-xs uppercase tracking-[0.14em] text-charcoal-soft">
+          <label htmlFor="enquiry-size" className="text-xs uppercase tracking-[0.14em] text-cream-soft">
             Size
           </label>
           <select
             id="enquiry-size"
             className="field mt-2"
             value={size}
-            onChange={(event) => setSize(event.target.value)}
+            onChange={(event) => {
+              resetPreview()
+              setSize(event.target.value)
+            }}
           >
             <option value="">Not sure yet</option>
             {sizes.map((option) => (
@@ -124,14 +138,14 @@ export default function EnquiryForm({ product = null, initialSize = '' }) {
               </option>
             ))}
           </select>
-          <p className="mt-2 text-xs text-charcoal-soft">
+          <p className="mt-2 text-xs text-cream-soft">
             Listed sizes are sample data and are confirmed only on enquiry.
           </p>
         </div>
       )}
 
       <div>
-        <label htmlFor="enquiry-name" className="text-xs uppercase tracking-[0.14em] text-charcoal-soft">
+        <label htmlFor="enquiry-name" className="text-xs uppercase tracking-[0.14em] text-cream-soft">
           Name
         </label>
         <input
@@ -141,19 +155,22 @@ export default function EnquiryForm({ product = null, initialSize = '' }) {
           autoComplete="name"
           className="field mt-2"
           value={name}
-          onChange={(event) => setName(event.target.value)}
+          onChange={(event) => {
+            resetPreview()
+            setName(event.target.value)
+          }}
           aria-invalid={errors.name ? 'true' : undefined}
           aria-describedby={errors.name ? 'enquiry-name-error' : undefined}
         />
         {errors.name && (
-          <p id="enquiry-name-error" className="mt-2 text-xs text-[#8a3d2f]">
+          <p id="enquiry-name-error" className="mt-2 text-xs text-error">
             {errors.name}
           </p>
         )}
       </div>
 
       <div>
-        <label htmlFor="enquiry-email" className="text-xs uppercase tracking-[0.14em] text-charcoal-soft">
+        <label htmlFor="enquiry-email" className="text-xs uppercase tracking-[0.14em] text-cream-soft">
           Email
         </label>
         <input
@@ -163,19 +180,22 @@ export default function EnquiryForm({ product = null, initialSize = '' }) {
           autoComplete="email"
           className="field mt-2"
           value={email}
-          onChange={(event) => setEmail(event.target.value)}
+          onChange={(event) => {
+            resetPreview()
+            setEmail(event.target.value)
+          }}
           aria-invalid={errors.email ? 'true' : undefined}
           aria-describedby={errors.email ? 'enquiry-email-error' : undefined}
         />
         {errors.email && (
-          <p id="enquiry-email-error" className="mt-2 text-xs text-[#8a3d2f]">
+          <p id="enquiry-email-error" className="mt-2 text-xs text-error">
             {errors.email}
           </p>
         )}
       </div>
 
       <div>
-        <label htmlFor="enquiry-message" className="text-xs uppercase tracking-[0.14em] text-charcoal-soft">
+        <label htmlFor="enquiry-message" className="text-xs uppercase tracking-[0.14em] text-cream-soft">
           Your question
         </label>
         <textarea
@@ -185,12 +205,15 @@ export default function EnquiryForm({ product = null, initialSize = '' }) {
           className="field mt-2 resize-y"
           placeholder="Availability, sizing, alterations, delivery…"
           value={message}
-          onChange={(event) => setMessage(event.target.value)}
+          onChange={(event) => {
+            resetPreview()
+            setMessage(event.target.value)
+          }}
           aria-invalid={errors.message ? 'true' : undefined}
           aria-describedby={errors.message ? 'enquiry-message-error' : undefined}
         />
         {errors.message && (
-          <p id="enquiry-message-error" className="mt-2 text-xs text-[#8a3d2f]">
+          <p id="enquiry-message-error" className="mt-2 text-xs text-error">
             {errors.message}
           </p>
         )}
@@ -200,7 +223,7 @@ export default function EnquiryForm({ product = null, initialSize = '' }) {
         <button type="submit" className="btn-solid w-full sm:w-auto">
           {hasWhatsApp ? 'Continue to WhatsApp' : 'Prepare enquiry'}
         </button>
-        <p className="mt-3 text-xs leading-relaxed text-charcoal-soft">
+        <p className="mt-3 text-xs leading-relaxed text-cream-soft">
           {hasWhatsApp
             ? 'This opens WhatsApp with your enquiry written out. Nothing is sent until you press send there.'
             : 'This form does not send anything by itself. It prepares your enquiry so you can send it once the studio’s details are published.'}
@@ -209,9 +232,9 @@ export default function EnquiryForm({ product = null, initialSize = '' }) {
 
       <div aria-live="polite">
         {status === 'whatsapp-opened' && (
-          <div className="border border-taupe bg-ivory-deep p-6">
-            <h3 className="text-xl text-charcoal">WhatsApp opened</h3>
-            <p className="mt-2 text-sm leading-relaxed text-charcoal-soft">
+          <div className="border border-gold/40 bg-ink-soft p-6">
+            <h3 className="text-xl text-cream">WhatsApp opened</h3>
+            <p className="mt-2 text-sm leading-relaxed text-cream-soft">
               Your enquiry is written out below as well, in case the chat did not open.
             </p>
             <ComposedBlock
@@ -223,9 +246,9 @@ export default function EnquiryForm({ product = null, initialSize = '' }) {
           </div>
         )}
         {status === 'prepared' && (
-          <div className="border border-taupe bg-ivory-deep p-6">
-            <h3 className="text-xl text-charcoal">Your enquiry is ready</h3>
-            <p className="mt-2 text-sm leading-relaxed text-charcoal-soft">
+          <div className="border border-gold/40 bg-ink-soft p-6">
+            <h3 className="text-xl text-cream">Your enquiry is ready</h3>
+            <p className="mt-2 text-sm leading-relaxed text-cream-soft">
               This preview is not connected to an inbox yet, so nothing was sent. Copy the
               text below and send it once {site.name} publishes its contact details.
             </p>
@@ -245,15 +268,15 @@ export default function EnquiryForm({ product = null, initialSize = '' }) {
 function ComposedBlock({ composed, copied, copyFailed, onCopy }) {
   return (
     <>
-      <pre className="mt-4 max-h-64 overflow-auto whitespace-pre-wrap border border-taupe-light bg-ivory p-4 font-sans text-sm leading-relaxed text-charcoal">
+      <pre className="mt-4 max-h-64 overflow-auto whitespace-pre-wrap border border-cream/15 bg-ink p-4 font-sans text-sm leading-relaxed text-cream">
         {composed}
       </pre>
       <button type="button" onClick={onCopy} className="btn-outline mt-4">
         {copied ? 'Copied' : 'Copy enquiry'}
       </button>
-      {copied && <p className="mt-2 text-xs text-olive">Copied to your clipboard.</p>}
+      {copied && <p className="mt-2 text-xs text-gold">Copied to your clipboard.</p>}
       {copyFailed && (
-        <p className="mt-2 text-xs text-[#8a3d2f]">
+        <p className="mt-2 text-xs text-error">
           Could not copy automatically. Select the text above and copy it manually.
         </p>
       )}

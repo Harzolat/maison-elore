@@ -33,14 +33,21 @@
 /* ------------------------------------------------------------------ */
 
 @theme {
-  --color-ivory: #f5f1e9;
-  --color-ivory-deep: #ede7d9;
-  --color-paper: #ffffff;
-  --color-charcoal: #20201d;
-  --color-charcoal-soft: #45443e;
-  --color-taupe: #b9a58a;
-  --color-taupe-light: #d9cdb8;
-  --color-olive: #686b50;
+  /* Black grounds, lightest first. */
+  --color-ink: #0b0a08;
+  --color-ink-soft: #14120e;
+  --color-ink-raised: #1a1712;
+
+  /* Warm text tones. */
+  --color-cream: #f4eddf;
+  --color-cream-soft: #b9ae97;
+
+  /* Gold accent: the brand colour. */
+  --color-gold: #c9a227;
+  --color-gold-light: #e2c46b;
+  --color-gold-deep: #8a6e1c;
+
+  --color-error: #e79a85;
 
   --font-display: 'Cormorant Garamond', 'Georgia', serif;
   --font-sans: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -65,8 +72,8 @@
   }
 
   body {
-    background-color: var(--color-ivory);
-    color: var(--color-charcoal);
+    background-color: var(--color-ink);
+    color: var(--color-cream);
     font-family: var(--font-sans);
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
@@ -83,12 +90,12 @@
   }
 
   ::selection {
-    background-color: var(--color-taupe);
-    color: var(--color-charcoal);
+    background-color: var(--color-gold);
+    color: var(--color-ink);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-olive);
+    outline: 2px solid var(--color-gold);
     outline-offset: 3px;
   }
 
@@ -147,8 +154,10 @@
       transform 0.8s var(--ease-out-editorial);
   }
 
-  .group:hover .lazy-img.zoomed {
-    transform: scale(1.04);
+  @media (hover: hover) {
+    .group:hover .lazy-img.zoomed {
+      transform: scale(1.045);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -161,15 +170,80 @@
     }
   }
 
-  /* Solid button, sharp corners. Ivory on charcoal by default. */
+  /* Gold hairline that draws under a card title on hover or focus. */
+  .card-rule {
+    display: block;
+    height: 1px;
+    background-color: var(--color-gold);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.5s var(--ease-out-editorial);
+  }
+
+  @media (hover: hover) {
+    .group:hover .card-rule,
+    .group:focus-visible .card-rule {
+      transform: scaleX(1);
+    }
+  }
+
+  /* Horizontal lookbook rail: snap scrolling on touch, a silent track. */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Slow gold thread used as a scroll cue on the hero. */
+  .scroll-cue {
+    position: relative;
+    display: block;
+    width: 1px;
+    height: 3rem;
+    overflow: hidden;
+    background-color: color-mix(in srgb, var(--color-cream) 22%, transparent);
+  }
+
+  .scroll-cue::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-gold);
+    animation: cue-drift 2.6s var(--ease-out-editorial) infinite;
+  }
+
+  @keyframes cue-drift {
+    0% {
+      transform: translateY(-100%);
+    }
+    60%,
+    100% {
+      transform: translateY(100%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-rule {
+      transition: none;
+    }
+
+    .scroll-cue::after {
+      animation: none;
+      transform: translateY(0);
+    }
+  }
+
+  /* Solid button, sharp corners. Gold on black by default. */
   .btn-solid {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.625rem;
     padding: 0.95rem 2.25rem;
-    background-color: var(--color-charcoal);
-    color: var(--color-ivory);
+    background-color: var(--color-gold);
+    color: var(--color-ink);
     font-size: 0.8125rem;
     font-weight: 500;
     letter-spacing: 0.14em;
@@ -180,22 +254,22 @@
   }
 
   .btn-solid:hover {
-    background-color: var(--color-olive);
+    background-color: var(--color-gold-light);
   }
 
   .btn-solid:active {
     transform: translateY(1px);
   }
 
-  /* Outlined button on ivory surfaces. */
+  /* Outlined button: gold rule, fills gold on hover. */
   .btn-outline {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.625rem;
     padding: 0.95rem 2.25rem;
-    border: 1px solid var(--color-charcoal);
-    color: var(--color-charcoal);
+    border: 1px solid var(--color-gold);
+    color: var(--color-cream);
     font-size: 0.8125rem;
     font-weight: 500;
     letter-spacing: 0.14em;
@@ -206,8 +280,8 @@
   }
 
   .btn-outline:hover {
-    background-color: var(--color-charcoal);
-    color: var(--color-ivory);
+    background-color: var(--color-gold);
+    color: var(--color-ink);
   }
 
   .btn-outline:active {
@@ -219,28 +293,28 @@
     width: 100%;
     background-color: transparent;
     border: 0;
-    border-bottom: 1px solid var(--color-taupe);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-gold) 45%, transparent);
     padding: 0.65rem 0;
     font-size: 0.9375rem;
-    color: var(--color-charcoal);
+    color: var(--color-cream);
     transition: border-color 0.3s var(--ease-out-editorial);
   }
 
   .field::placeholder {
-    color: color-mix(in srgb, var(--color-charcoal-soft) 55%, transparent);
+    color: color-mix(in srgb, var(--color-cream-soft) 55%, transparent);
   }
 
   .field:hover {
-    border-color: var(--color-charcoal-soft);
+    border-color: color-mix(in srgb, var(--color-gold) 75%, transparent);
   }
 
   .field:focus {
     outline: none;
-    border-color: var(--color-charcoal);
+    border-color: var(--color-gold-light);
   }
 
   .field[aria-invalid='true'] {
-    border-color: #8a3d2f;
+    border-color: var(--color-error);
   }
 
   @media (prefers-reduced-motion: reduce) {
