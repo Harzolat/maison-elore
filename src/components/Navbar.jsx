@@ -53,18 +53,17 @@ export default function Navbar() {
       >
         <Link
           to="/"
-          className="group flex items-center gap-3"
+          className="group -my-2 flex items-center py-2"
           aria-label={`${site.name}, home`}
         >
           <img
             src="/images/logo-light.png"
             alt=""
             aria-hidden="true"
-            className="h-7 w-7 transition-transform duration-500 ease-out group-hover:rotate-[10deg] md:h-8 md:w-8"
+            width="1727"
+            height="624"
+            className="h-5 w-auto transition-transform duration-500 ease-out group-hover:-translate-y-px md:h-6"
           />
-          <span className="font-display text-lg uppercase tracking-[0.28em] text-cream md:text-xl">
-            {site.name}
-          </span>
         </Link>
 
         <nav aria-label="Main" className="hidden lg:block">

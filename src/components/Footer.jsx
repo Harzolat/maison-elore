@@ -20,18 +20,15 @@ export default function Footer() {
       <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
-            <img
-              src="/images/logo-light.png"
-              alt=""
-              aria-hidden="true"
-              className="mb-6 h-12 w-12"
-            />
-            <Link
-              to="/"
-              className="font-display text-xl uppercase tracking-[0.3em] text-cream"
-              aria-label={`${site.name}, home`}
-            >
-              {site.name}
+            <Link to="/" className="inline-block" aria-label={`${site.name}, home`}>
+              <img
+                src="/images/logo-light.png"
+                alt=""
+                aria-hidden="true"
+                width="1727"
+                height="624"
+                className="mb-6 h-9 w-auto"
+              />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-cream-soft">
               {site.descriptor}, by appointment and online.

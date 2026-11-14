@@ -5,14 +5,18 @@
 Every file in `public/images/products/` is the studio's own product
 photography, cropped to the site's 3:4 product frame (1200x1600).
 
-The R mark is also studio supplied and appears as:
+The L8HR registered mark is also studio supplied and appears as:
 
 | File | Use |
 | --- | --- |
-| `public/images/logo.png` | Black mark, transparent (navbar, mobile menu) |
-| `public/images/logo-light.png` | White mark, transparent (charcoal footer) |
-| `public/favicon.png` | Browser tab icon |
-| `public/apple-touch-icon.png` | Mobile home-screen icon |
+| `public/images/logo.png` | Ink mark, transparent (light grounds) |
+| `public/images/logo-light.png` | Cream mark with the orange accent dots, transparent (navbar, mobile menu, footer) |
+| `public/favicon.png` | L8 monogram on the ink ground, browser tab icon |
+| `public/apple-touch-icon.png` | Same monogram at 192px, mobile home-screen icon |
+
+The wordmark is trimmed to its artwork (1727x624) and used at its own
+aspect ratio, so keep the `width`/`height` attributes in step if it is
+replaced.
 
 When swapping in new product photography, keep the 3:4 ratio so the
 grid and gallery stay stable.

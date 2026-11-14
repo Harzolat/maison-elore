@@ -92,13 +92,17 @@ export default function MobileMenu({ open, onClose }) {
             <Link
               to="/"
               onClick={onClose}
-              className="flex items-center gap-3"
+              className="flex items-center"
               aria-label={`${site.name}, home`}
             >
-              <img src="/images/logo-light.png" alt="" aria-hidden="true" className="h-6 w-6" />
-              <span className="font-display text-base uppercase tracking-[0.3em] text-cream">
-                {site.name}
-              </span>
+              <img
+                src="/images/logo-light.png"
+                alt=""
+                aria-hidden="true"
+                width="1727"
+                height="624"
+                className="h-5 w-auto"
+              />
             </Link>
             <button
               ref={closeButtonRef}

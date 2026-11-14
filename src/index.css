@@ -56,28 +56,76 @@
 }
 
 /* ------------------------------------------------------------------ */
+/* Scroll and reveal timing                                             */
+/* ------------------------------------------------------------------ */
+
+/* 1. Native smooth anchor jumps, with visible padding so section headings
+   are not swallowed by the sticky bar. Reduced motion keeps the default
+   instant jump. */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* 2. Gentle page reveal so the first paint does not feel like a wait behind
+   existing content. It is short and subtle so nothing is blocked behind it.
+   The gold band lines are decorative only and removed under reduced motion. */
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  animation: entry 0.5s var(--ease-out-editorial) both;
+  background-image: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-gold) 1.2%, transparent) 0%,
+      transparent 26%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 60%,
+      color-mix(in srgb, var(--color-gold) 0.8%, transparent) 100%
+    );
+  background-repeat: no-repeat;
+  background-size: 100% 1px, 100% 100%;
+}
+
+@keyframes entry {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+    background-image: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /* Base                                                                 */
 /* ------------------------------------------------------------------ */
 
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
-    scroll-behavior: smooth;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-  }
-
-  body {
-    background-color: var(--color-ink);
-    color: var(--color-cream);
-    font-family: var(--font-sans);
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
+    overscroll-behavior: contain;
   }
 
   h1,
